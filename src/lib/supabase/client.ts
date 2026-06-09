@@ -1,7 +1,7 @@
-import { createBrowserClient } from '@supabase/ssr'
+import { createLocalClient } from '@/lib/db/local-client'
 
+// Returns a localStorage-backed client with the same API as the Supabase client.
+// To switch to real Supabase: replace this with createBrowserClient from @supabase/ssr
 export function createClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://placeholder.supabase.co'
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? 'placeholder'
-  return createBrowserClient(url, key)
+  return createLocalClient()
 }

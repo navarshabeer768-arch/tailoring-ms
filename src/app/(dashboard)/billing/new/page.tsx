@@ -39,7 +39,7 @@ function NewInvoiceContent() {
         .order('created_at', { ascending: false })
       setOrders((data || []) as Order[])
       if (orderId) {
-        const found = data?.find(o => o.id === orderId)
+        const found = data?.find((o: Order) => o.id === orderId)
         if (found) setSelectedOrder(found as Order)
       }
     }

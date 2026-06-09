@@ -53,28 +53,28 @@ export default function ReportsPage() {
       const dayCount = period === 'week' ? 7 : period === 'month' ? 30 : 12
       const salesByDay = Array.from({ length: dayCount }, (_, i) => {
         const date = subDays(now, dayCount - 1 - i)
-        const dayPayments = payments?.filter(p => {
+        const dayPayments = payments?.filter((p: any) => {
           const pDate = new Date(p.payment_date)
           return pDate.toDateString() === date.toDateString()
         })
         return {
           date: format(date, dayCount > 30 ? 'MMM' : 'MMM dd'),
-          revenue: dayPayments?.reduce((s, p) => s + p.amount, 0) || 0,
-          orders: orders?.filter(o => new Date(o.created_at).toDateString() === date.toDateString()).length || 0,
+          revenue: dayPayments?.reduce((s: number, p: any) => s + (p.amount || 0), 0) || 0,
+          orders: orders?.filter((o: any) => new Date(o.created_at).toDateString() === date.toDateString()).length || 0,
         }
       })
       setSalesData(salesByDay)
 
       // Order status distribution
       const statusCounts: Record<string, number> = {}
-      orders?.forEach(o => { statusCounts[o.status] = (statusCounts[o.status] || 0) + 1 })
+      orders?.forEach((o: any) => { statusCounts[o.status] = (statusCounts[o.status] || 0) + 1 })
       setOrderStatusData(Object.entries(statusCounts).map(([name, value], i) => ({
         name: name.charAt(0).toUpperCase() + name.slice(1), value, color: COLORS[i % COLORS.length]
       })))
 
       // Top services
       const serviceCounts: Record<string, { count: number; revenue: number }> = {}
-      orderItems?.forEach(item => {
+      orderItems?.forEach((item: any) => {
         const name = (item as any).services?.name || 'Custom'
         if (!serviceCounts[name]) serviceCounts[name] = { count: 0, revenue: 0 }
         serviceCounts[name].count++
@@ -84,7 +84,7 @@ export default function ReportsPage() {
         .sort((a, b) => b.revenue - a.revenue).slice(0, 6))
 
       // Summary
-      const totalRevenue = payments?.reduce((s, p) => s + p.amount, 0) || 0
+      const totalRevenue = payments?.reduce((s: number, p: any) => s + (p.amount || 0), 0) || 0
       const totalOrders = orders?.length || 0
       setSummary({
         revenue: totalRevenue,

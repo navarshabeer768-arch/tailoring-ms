@@ -62,13 +62,13 @@ export default function DashboardPage() {
         supabase.from('orders').select('status').not('status', 'eq', 'cancelled'),
       ])
 
-      const monthlyRevenue = payments?.reduce((sum, p) => sum + p.amount, 0) || 0
+      const monthlyRevenue = payments?.reduce((sum: number, p: any) => sum + (p.amount || 0), 0) || 0
       const outstanding = await supabase.from('invoices').select('balance_due').gt('balance_due', 0)
-      const outstandingTotal = outstanding.data?.reduce((sum, i) => sum + i.balance_due, 0) || 0
+      const outstandingTotal = outstanding.data?.reduce((sum: number, i: any) => sum + (i.balance_due || 0), 0) || 0
 
       // Order status distribution
       const statusCounts: Record<string, number> = {}
-      allOrders?.forEach(o => { statusCounts[o.status] = (statusCounts[o.status] || 0) + 1 })
+      allOrders?.forEach((o: any) => { statusCounts[o.status] = (statusCounts[o.status] || 0) + 1 })
       const pieData = Object.entries(statusCounts).map(([status, count], i) => ({
         name: status.charAt(0).toUpperCase() + status.slice(1),
         value: count,

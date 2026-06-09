@@ -33,8 +33,8 @@ export default function SettingsPage() {
     const { error } = await supabase.auth.resetPasswordForEmail(user?.email || '', {
       redirectTo: `${window.location.origin}/reset-password`,
     })
-    if (error) toast.error(error.message)
-    else toast.success('Password reset email sent')
+    if (error) toast.error((error as any).message)
+    else toast.success('Password reset link sent to your email')
   }
 
   return (

@@ -1,12 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Sidebar from '@/components/layout/sidebar'
 import Header from '@/components/layout/header'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false)
+  const [checked, setChecked] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    try {
+      const session = JSON.parse(localStorage.getItem('tms_session') || 'null')
+      if (!session?.user) {
+        router.replace('/login')
+        return
+      }
+    } catch {
+      router.replace('/login')
+      return
+    }
+    setChecked(true)
+  }, [router])
+
+  if (!checked) return null
 
   return (
     <TooltipProvider>
