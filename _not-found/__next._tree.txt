@@ -1,2 +1,2 @@
-:HL["/tailoring-ms/_next/static/chunks/213xoooqvk2mg.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"9fL_Ew8PnHTESLcYHD7t1"}
+:HL["/tailoring-ms/_next/static/chunks/230jwoolcuh5q.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"xvGHOKUb4_BImpDA9dte-"}
